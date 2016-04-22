@@ -82,7 +82,8 @@
             self.scanReader.cameraOverlayView = polygonView;
             //[self.scanReader.view addSubview:polygonView];
         }
-
+        
+        //self.vcSettings = [[ViewControllerSettings alloc] initWithNibName:@"Validated" bundle:[NSBundle mainBundle]];
         [self.viewController presentViewController:self.scanReader animated:YES completion:nil];
     }
 }
