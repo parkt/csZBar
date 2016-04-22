@@ -10,70 +10,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hr-rO-feb">
-                    <rect key="frame" x="0.0" y="460" width="320" height="113"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <attributedString key="attributedText">
-                        <fragment content="ASK YOUR SALES ASSOCIATE, SERVER OR CASHIER FOR THE ">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue-Light"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="VALIDATION CODE">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue-Bold"/>
-                                <font key="NSOriginalFont" size="17" name="HelveticaNeue-Bold"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sUg-Qm-tYt">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    <items>
-                        <navigationItem id="zKW-ei-Nes">
-                            <barButtonItem key="rightBarButtonItem" style="plain" id="fhV-PT-tQI">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UeM-cf-0UF">
-                                    <rect key="frame" x="264" y="7" width="40" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="34" id="bcw-DT-POo"/>
-                                        <constraint firstAttribute="width" constant="280" id="w6m-nn-XXq"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                    <state key="normal" title="Close">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onCancelButtonTap" destination="-1" eventType="touchUpInside" id="FKQ-EE-cRj"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqc-ys-dIV">
-                    <rect key="frame" x="0.0" y="44" width="320" height="52"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <attributedString key="attributedText">
-                        <fragment content="SCAN VALIDATION CODE">
-                            <attributes>
-                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue-Light"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UeM-cf-0UF">
+                    <rect key="frame" x="20" y="514" width="280" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="bcw-DT-POo"/>
+                        <constraint firstAttribute="width" constant="280" id="w6m-nn-XXq"/>
+                    </constraints>
+                    <state key="normal" title="Cancel">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCancelButtonTap" destination="-1" eventType="touchUpInside" id="FKQ-EE-cRj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="746" y="404"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="UeM-cf-0UF" secondAttribute="bottom" constant="20" id="EKk-2g-b6Y"/>
+                <constraint firstAttribute="centerX" secondItem="UeM-cf-0UF" secondAttribute="centerX" id="JvR-9E-Mdj"/>
+            </constraints>
         </view>
     </objects>
 </document>
