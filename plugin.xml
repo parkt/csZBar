@@ -100,12 +100,6 @@
         <header-file src="ios/ZBarSDK/zbar/Symbol.h" />
         <header-file src="ios/ZBarSDK/zbar/Video.h" />
         <header-file src="ios/ZBarSDK/zbar/Window.h" />
-        <resource-file src="ios/Resources/CsZBar.xib" />
-        <resource-file src="ios/Resources/Validated.xib" />
-        <resource-file src="ios/Resources/CsZBarScanView.xib" />
-        <resource-file src="ios/CsZBar.xib" />
-        <resource-file src="ios/Validated.xib" />
-        <resource-file src="ios/CsZBarScanView.xib" />
     </platform>
 
 </plugin>
