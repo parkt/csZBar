@@ -75,7 +75,9 @@
             self.scanReader.cameraDevice = UIImagePickerControllerCameraDeviceFront;
         }
         self.scanReader.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
-
+        self.scanReader.showsZBarControls = NO; // remove default toolbar
+        
+        
         NSString *flash = [params objectForKey:@"flash"];
        if([flash isEqualToString:@"on"]) {
             self.scanReader.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
@@ -86,26 +88,88 @@
         }
 
         // Hack to hide the bottom bar's Info button... originally based on http://stackoverflow.com/a/16353530
-        UIView *infoButton = [[[[[self.scanReader.view.subviews objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:3];
-        [infoButton setHidden:YES];
-        // Add an action in current code file (i.e. target)
-      //  [infoButton addTarget: action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
+        //UIView *infoButton = [[[[[self.scanReader.view.subviews objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:3];
+        
+        //UIView *infoButton = [self.scanReader.view.subviews objectAtIndex:2];
+        //[infoButton setHidden:YES];
 
         //UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem]; [button setTitle:@"Press Me" forState:UIControlStateNormal]; [button sizeToFit]; [self.view addSubview:button];
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
         
+        //[self.scanReader.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin];
         
-        BOOL drawSight = [params objectForKey:@"drawSight"] ? [[params objectForKey:@"drawSight"] boolValue] : true;
+        BOOL drawSight     = [params objectForKey:@"drawSight"] ? [[params objectForKey:@"drawSight"] boolValue] : true;
+        
+        NSString *txtTitle = @"SCAN VALIDATION CODE";
+        NSString *txtInstr = @"ASK YOUR SALES ASSOCIATE, SERVER OR CASHIER FOR THE VALIDATION CODE";
+        
+        UIFont * customFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:20]; //custom font
+        UIColor *valColor = [self getUIColorObjectFromHexString:@"#ed266b" alpha:.9];
+        UIColor *bckgColor = [self getUIColorObjectFromHexString:@"#333333" alpha:.9];
+        
         UIToolbar *toolbarViewFlash = [[UIToolbar alloc] init];
+        
         //The bar length it depends on the orientation
-        toolbarViewFlash.frame = CGRectMake(0.0, 0, (screenWidth > screenHeight ?screenWidth:screenHeight), 44.0);
-        toolbarViewFlash.barStyle = UIBarStyleBlackOpaque;
+        toolbarViewFlash.frame = CGRectMake(0.0, 0, screenWidth, 44.0);
+        toolbarViewFlash.barStyle = UIBarStyleBlack; // UIBarStyleBlackOpaque;
+        toolbarViewFlash.backgroundColor = [UIColor blackColor];
+        
         UIBarButtonItem *buttonFlash = [[UIBarButtonItem alloc] initWithTitle:@"Flash" style:UIBarButtonItemStyleDone target:self action:@selector(toggleflash)];
-        NSArray *buttons = [NSArray arrayWithObjects: buttonFlash, nil];
-        [toolbarViewFlash setItems:buttons animated:NO];
+        UIBarButtonItem *flex        = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *buttonDone  = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStyleDone target:self action:@selector(cancelscan)];
+        buttonDone.tintColor = valColor; //[UIColor purpleColor];
+        
+        NSArray *buttons = [NSArray arrayWithObjects: flex, buttonDone, nil];
+        //[toolbarViewFlash setItems:buttons animated:NO];
+        [toolbarViewFlash setItems:[NSArray arrayWithObjects: flex, buttonDone, nil]];
         [self.scanReader.view addSubview:toolbarViewFlash];
+
+        
+        // INSTRUCTIONS --- BOTTOM LABEL
+        // add padding
+        NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        style.alignment = NSTextAlignmentJustified;
+        style.firstLineHeadIndent = 10.0f;
+        style.headIndent = 10.0f;
+        style.tailIndent = -10.0f;
+        NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:txtInstr attributes:@{ NSParagraphStyleAttributeName : style}];
+
+        // create label
+        UILabel *bottomLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, screenHeight-100, screenWidth, 100)];
+        //bottomLabel.text = txtInstr;
+        bottomLabel.font = customFont;
+        bottomLabel.attributedText = attrText;
+        bottomLabel.numberOfLines = 0;
+        bottomLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters; //UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
+        bottomLabel.adjustsFontSizeToFitWidth = NO; //YES;
+        bottomLabel.adjustsLetterSpacingToFitWidth = NO; //YES;
+        //bottomLabel.minimumScaleFactor = 10.0f/12.0f;
+        bottomLabel.clipsToBounds = YES;
+        bottomLabel.backgroundColor = bckgColor; //[UIColor darkGrayColor];
+        bottomLabel.textColor = [UIColor whiteColor];
+        bottomLabel.textAlignment = NSTextAlignmentCenter;
+        //[bottomLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin];
+        [self.scanReader.view  addSubview:bottomLabel];
+
+
+        // TITLE --- TOP LABEL
+        UILabel *topLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 44.0, screenWidth, 50)];
+        topLabel.text = txtTitle;
+        topLabel.font = customFont;
+        topLabel.numberOfLines = 0;
+        topLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters; //UIBaselineAdjustmentAlignBaselines; // or UIBaselineAdjustmentAlignCenters, or UIBaselineAdjustmentNone
+        topLabel.adjustsFontSizeToFitWidth = NO; //YES;
+        topLabel.adjustsLetterSpacingToFitWidth = NO; //YES;
+        //topLabel.minimumScaleFactor = 10.0f/12.0f;
+        topLabel.clipsToBounds = YES;
+        topLabel.backgroundColor = bckgColor; //[UIColor darkGrayColor];
+        topLabel.textColor = [UIColor whiteColor];
+        topLabel.textAlignment = NSTextAlignmentCenter;
+        //[topLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin];
+        [self.scanReader.view  addSubview:topLabel];
+
 
         if(drawSight){
 
@@ -143,6 +207,49 @@
     }
         [device unlockForConfiguration];
 
+}
+
+-(void)cancelscan{
+    
+    NSLog(@"Cancel Scan View");
+    [self.scanReader dismissViewControllerAnimated: YES completion: ^(void) {
+        self.scanInProgress = NO;
+        [self sendScanResult: [CDVPluginResult
+                               resultWithStatus: CDVCommandStatus_ERROR
+                               messageAsString: @"cancelled"]];
+    }];
+    
+}
+
+- (UIColor *)getUIColorObjectFromHexString:(NSString *)hexStr alpha:(CGFloat)alpha
+{
+    // Convert hex string to an integer
+    unsigned int hexint = [self intFromHexString:hexStr];
+    
+    // Create color object, specifying alpha as well
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:alpha];
+    
+    return color;
+}
+
+- (unsigned int)intFromHexString:(NSString *)hexStr
+{
+    unsigned int hexInt = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hexStr];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@"#"]];
+    
+    // Scan hex value
+    [scanner scanHexInt:&hexInt];
+    
+    return hexInt;
 }
 
 #pragma mark - Helpers
