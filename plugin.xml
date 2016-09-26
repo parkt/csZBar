@@ -65,6 +65,14 @@
     </platform>
 
     <platform name="ios">
+        <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+            <string>Validated needs access to your camera in order to scan validation offers and enable you to take pictures of receipts. </string>
+        </config-file>
+        <!--
+        <config-file parent="NSPhotoLibraryUsageDescriptionentry" target="*-Info.plist">
+            <string>Validated needs access to your camera in order to scan validation offers and enable you to take pictures of receipts.</string>
+        </config-file>
+        -->
         <config-file target="config.xml" parent="/*">
             <feature name="CsZBar">
                 <param name="ios-package" value="CsZBar"/>
