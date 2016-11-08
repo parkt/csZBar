@@ -20,8 +20,9 @@
         android:fontFamily="sans-serif-light"
         android:textSize="10pt" />
 
+    
+    <TextView android:id="@+id/csZbarScannerInstructions" />
     <!--
-    <TextView android:id="@+id/csZbarScannerInstructions"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
