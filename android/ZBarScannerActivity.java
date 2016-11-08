@@ -159,7 +159,7 @@ implements SurfaceHolder.Callback {
             TextView view_textTitle = (TextView) findViewById(getResourceId("id/csZbarScannerTitle"));
             //TextView view_textInstructions = (TextView) findViewById(getResourceId("id/csZbarScannerInstructions"));
             view_textTitle.setText(textTitle);
-            view_textInstructions.setText(textInstructions);
+            //view_textInstructions.setText(textInstructions);
 
             // Draw/hide the sight
             if(!drawSight) {
