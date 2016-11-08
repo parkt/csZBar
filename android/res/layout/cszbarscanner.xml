@@ -20,6 +20,7 @@
         android:fontFamily="sans-serif-light"
         android:textSize="10pt" />
 
+    <!--
     <TextView android:id="@+id/csZbarScannerInstructions"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_width="match_parent"
@@ -34,7 +35,8 @@
         android:background="@color/csZbarScannerTextBackground"
         android:fontFamily="sans-serif-light"
         android:text="@string/csZbarScannerInstructions" />
-
+    -->
+    
     <RelativeLayout android:id="@+id/csZbarScannerSightContainer"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">

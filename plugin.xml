@@ -36,7 +36,7 @@
             <uses-permission android:name="android.permission.CAMERA" />
         </config-file>
         <config-file target="res/values/strings.xml" parent="/*">
-            <string name="csZbarScannerTitle">Scan QR Code</string>
+            <string name="csZbarScannerTitle">SCAN VALIDATED CODE</string>
             <string name="csZbarScannerInstructions">Please point your camera at the QR code.</string>
             <color name="csZbarScannerTextColor">#ffffff</color>
             <color name="csZbarScannerTextBackground">#88000000</color>

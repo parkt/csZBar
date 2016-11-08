@@ -102,7 +102,7 @@
         
         BOOL drawSight     = [params objectForKey:@"drawSight"] ? [[params objectForKey:@"drawSight"] boolValue] : true;
         
-        NSString *txtTitle = @"SCAN VALIDATION CODE";
+        NSString *txtTitle = @"SCAN VALIDATED CODE";
         NSString *txtInstr = @"ASK YOUR SALES ASSOCIATE, SERVER OR CASHIER FOR THE VALIDATION CODE";
         
         UIFont * customFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:20]; //custom font
@@ -129,7 +129,7 @@
         
         // INSTRUCTIONS --- BOTTOM LABEL
         // add padding
-        NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        /*NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
         style.alignment = NSTextAlignmentJustified;
         style.firstLineHeadIndent = 10.0f;
         style.headIndent = 10.0f;
@@ -151,7 +151,7 @@
         bottomLabel.textColor = [UIColor whiteColor];
         bottomLabel.textAlignment = NSTextAlignmentCenter;
         //[bottomLabel setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin];
-        [self.scanReader.view  addSubview:bottomLabel];
+        [self.scanReader.view  addSubview:bottomLabel];*/
 
 
         // TITLE --- TOP LABEL
